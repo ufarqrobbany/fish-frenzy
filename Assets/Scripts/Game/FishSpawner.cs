@@ -19,19 +19,36 @@ public class FishSpawner : MonoBehaviour
         StartCoroutine(SpawnFish());
     }
 
+
     IEnumerator SpawnFish()
     {
         while (true)
         {
             // Hapus objek yang hilang atau sudah diambil dari daftar
-            spawnedFish.RemoveAll(fish => fish == null);
+            spawnedFish.RemoveAll(fish => fish == null || !fish.activeInHierarchy);
 
             // Cek apakah masih bisa menambah ikan baru
             if (spawnedFish.Count < maxFish)
             {
-                Vector2 spawnPos = new Vector2(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y));
-                GameObject fish = Instantiate(GetRandomFishPrefab(), spawnPos, Quaternion.identity);
-                spawnedFish.Add(fish);
+                int fishToSpawn = Mathf.Min(4, maxFish - spawnedFish.Count);
+                for (int i = 0; i < fishToSpawn; i++)
+                {
+
+                    Vector2 spawnPos = new Vector2(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(-spawnArea.y, spawnArea.y));
+                    GameObject fishPrefab = GetRandomFishPrefab();
+
+                    // Pastikan prefab tidak null sebelum di-spawn
+                    if (fishPrefab != null)
+                    {
+                        GameObject fish = Instantiate(fishPrefab, spawnPos, Quaternion.identity);
+                        fish.SetActive(true);
+                        spawnedFish.Add(fish);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Fish prefab is null! Please check the prefab assignments.");
+                    }
+                }
             }
             yield return new WaitForSeconds(spawnInterval);
         }
@@ -46,7 +63,7 @@ public class FishSpawner : MonoBehaviour
             // 30% kemungkinan ikan besar
             return bigFishPrefab;
         }
-        else if (randomValue < 35f)
+        else if (randomValue < 65f) // Mengubah batas ke 65 untuk 35%
         {
             // 35% kemungkinan ikan sedang
             return mediumFishPrefab;
@@ -57,4 +74,5 @@ public class FishSpawner : MonoBehaviour
             return smallFishPrefab;
         }
     }
+
 }
