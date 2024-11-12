@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Fish
   - StorageArea
+  - SmallFish
+  - MediumFish
+  - BigFish
   layers:
   - Default
   - TransparentFX

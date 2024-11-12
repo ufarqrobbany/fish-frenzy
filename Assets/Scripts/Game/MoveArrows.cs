@@ -65,7 +65,7 @@ public class MoveArrows : MonoBehaviour
                 Debug.Log("Player 2 Score: " + score);
             }
 
-            Destroy(capturedFish);  // Menghapus ikan setelah disimpan
+            capturedFish.SetActive(false);  // Menghapus ikan setelah disimpan
             capturedFish = null;    // Reset ikan yang dibawa
         }
     }

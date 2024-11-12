@@ -62,10 +62,10 @@ public class MoveWASD : MonoBehaviour
             if (fish != null)
             {
                 score += fish.pointValue; // Menambah poin berdasarkan jenis ikan
-                Debug.Log("Player 2 Score: " + score);
+                Debug.Log("Player 1 Score: " + score);
             }
 
-            Destroy(capturedFish);  // Menghapus ikan setelah disimpan
+            capturedFish.SetActive(false);  // Menghapus ikan setelah disimpan
             capturedFish = null;    // Reset ikan yang dibawa
         }
     }
