@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MoveArrows : MonoBehaviour
 {
     public float speed;
     public int score = 0;  // Poin pemain 2
+    public TMP_Text scoreText;
     private GameObject capturedFish = null; // Ikan yang dibawa pemain 2
 
     float MovementX;
@@ -44,6 +46,11 @@ public class MoveArrows : MonoBehaviour
 
         // Atur kecepatan berdasarkan input
         Rb.velocity = new Vector2(MovementX * speed * Time.deltaTime, MovementY * speed * Time.deltaTime);
+
+        if(capturedFish  != null) 
+        {
+            capturedFish.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -52,7 +59,7 @@ public class MoveArrows : MonoBehaviour
         if (other.CompareTag("Fish") && capturedFish == null)
         {
             capturedFish = other.gameObject;  // Menyimpan ikan yang ditangkap
-            capturedFish.SetActive(false);    // Menyembunyikan ikan saat dibawa
+            capturedFish.GetComponent<Collider2D>().enabled = false;    // Menyembunyikan ikan saat dibawa
             Debug.Log("Ikan tertangkap");
         }
         // Menyimpan ikan ke area penyimpanan jika sudah dibawa
@@ -62,11 +69,17 @@ public class MoveArrows : MonoBehaviour
             if (fish != null)
             {
                 score += fish.pointValue; // Menambah poin berdasarkan jenis ikan
-                Debug.Log("Player 2 Score: " + score);
+                UpdateScoreText();
             }
 
             capturedFish.SetActive(false);  // Menghapus ikan setelah disimpan
+            capturedFish.GetComponent<Collider2D>().enabled = false;
             capturedFish = null;    // Reset ikan yang dibawa
         }
+    }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = score.ToString();
     }
 }

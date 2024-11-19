@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MoveWASD : MonoBehaviour
 {
     public float speed;
     public int score = 0;  // Poin pemain 1
+    public TMP_Text scoreText;
     private GameObject capturedFish = null; // Ikan yang dibawa pemain 1
 
     float MovementX;
@@ -44,6 +46,12 @@ public class MoveWASD : MonoBehaviour
 
         // Atur kecepatan berdasarkan input
         Rb.velocity = new Vector2(MovementX * speed * Time.deltaTime, MovementY * speed * Time.deltaTime);
+
+        // Posisi ikan mengikuti pemain jika ada yang tertangkap
+        if (capturedFish != null)
+        {
+            capturedFish.transform.position = transform.position + new Vector3(0, -0.5f, 0); // Tempelkan ikan di bawah pemain
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -52,7 +60,7 @@ public class MoveWASD : MonoBehaviour
         if (other.CompareTag("Fish") && capturedFish == null)
         {
             capturedFish = other.gameObject;  // Menyimpan ikan yang ditangkap
-            capturedFish.SetActive(false);    // Menyembunyikan ikan saat dibawa
+            capturedFish.GetComponent<Collider2D>().enabled = false; // Matikan collider ikan
             Debug.Log("Ikan tertangkap");
         }
         // Menyimpan ikan ke area penyimpanan jika sudah dibawa
@@ -62,11 +70,17 @@ public class MoveWASD : MonoBehaviour
             if (fish != null)
             {
                 score += fish.pointValue; // Menambah poin berdasarkan jenis ikan
-                Debug.Log("Player 1 Score: " + score);
+                UpdateScoreText();
             }
 
-            capturedFish.SetActive(false);  // Menghapus ikan setelah disimpan
-            capturedFish = null;    // Reset ikan yang dibawa
+            capturedFish.SetActive(false); // Nonaktifkan ikan setelah disimpan
+            capturedFish.GetComponent<Collider2D>().enabled = true; // Aktifkan kembali collider jika digunakan lagi nanti
+            capturedFish = null; // Reset ikan yang dibawa
         }
+    }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = score.ToString();
     }
 }
