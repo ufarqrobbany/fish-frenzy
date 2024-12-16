@@ -66,7 +66,7 @@ public class MoveWASD : MonoBehaviour
         // Menyimpan ikan ke area penyimpanan jika sudah dibawa
         else if (other.CompareTag("StorageArea") && capturedFish != null)
         {
-            Fish fish = capturedFish.GetComponent<Fish>();
+            FishController fish = capturedFish.GetComponent<FishController>();
             if (fish != null)
             {
                 score += fish.pointValue; // Menambah poin berdasarkan jenis ikan

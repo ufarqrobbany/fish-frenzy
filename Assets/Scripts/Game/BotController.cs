@@ -78,7 +78,7 @@ public class BotController : MonoBehaviour
         }
         else if (other.CompareTag("StorageArea") && capturedFish != null)
         {
-            Fish fish = capturedFish.GetComponent<Fish>();
+            FishController fish = capturedFish.GetComponent<FishController>();
             if (fish != null)
             {
                 score += fish.pointValue;

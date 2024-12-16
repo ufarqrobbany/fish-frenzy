@@ -2834,6 +2834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e66f93bdfe2396408f366f0a3ce31c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointValue: 0
   speed: 1.5
   areaLimit: {x: 7, y: 3}
 --- !u!212 &1658049087
@@ -3423,6 +3424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e66f93bdfe2396408f366f0a3ce31c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointValue: 0
   speed: 1.5
   areaLimit: {x: 7, y: 3}
 --- !u!212 &1800404648
@@ -3542,7 +3544,6 @@ GameObject:
   - component: {fileID: 1852674557}
   - component: {fileID: 1852674556}
   - component: {fileID: 1852674555}
-  - component: {fileID: 1852674554}
   - component: {fileID: 1852674553}
   m_Layer: 0
   m_Name: PoisonFish
@@ -3577,19 +3578,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1852674554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852674552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31b6d19d27ddef742a60e9e9187911ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pointValue: -1
 --- !u!114 &1852674555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3602,6 +3590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e66f93bdfe2396408f366f0a3ce31c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointValue: 0
   speed: 1.5
   areaLimit: {x: 7, y: 3}
 --- !u!212 &1852674556
@@ -4088,6 +4077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e66f93bdfe2396408f366f0a3ce31c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointValue: 0
   speed: 1.5
   areaLimit: {x: 7, y: 3}
 --- !u!212 &2084600508
