@@ -65,8 +65,8 @@ public class GameManager : MonoBehaviour
                 if (player.GetComponent<MoveArrows>() != null)
                     player.GetComponent<MoveArrows>().enabled = false;
 
-                if (player.GetComponent<BotController>() != null)
-                    player.GetComponent<BotController>().enabled = false;
+                if (player.GetComponent<MoveBot>() != null)
+                    player.GetComponent<MoveBot>().enabled = false;
             }
         }
 
@@ -109,8 +109,8 @@ public class GameManager : MonoBehaviour
                 else if (player.GetComponent<MoveArrows>() != null)
                     playerScore = player.GetComponent<MoveArrows>().score;
 
-                else if (player.GetComponent<BotController>() != null)
-                    playerScore = player.GetComponent<BotController>().score;
+                else if (player.GetComponent<MoveBot>() != null)
+                    playerScore = player.GetComponent<MoveBot>().score;
 
                 // Tentukan pemain dengan skor tertinggi
                 if (playerScore > highestScore)

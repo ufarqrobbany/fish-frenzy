@@ -85,4 +85,27 @@ public abstract class PlayerController : MonoBehaviour
     {
         scoreText.text = score.ToString();
     }
+
+    // Cari ikan terdekat
+    protected GameObject FindNearestFish()
+    {
+        GameObject[] fishObjects = GameObject.FindGameObjectsWithTag("Fish");
+        GameObject nearestFish = null;
+        float shortestDistance = Mathf.Infinity;
+
+        foreach (GameObject fish in fishObjects)
+        {
+            if (fish.activeInHierarchy) // Hanya ikan yang aktif yang diperhitungkan
+            {
+                float distance = Vector2.Distance(transform.position, fish.transform.position);
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestFish = fish;
+                }
+            }
+        }
+
+        return nearestFish;
+    }
 }
