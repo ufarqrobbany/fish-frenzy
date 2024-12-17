@@ -70,7 +70,7 @@ public abstract class PlayerController : MonoBehaviour
             FishController fish = capturedFish.GetComponent<FishController>();
             if (fish != null)
             {
-                score += fish.pointValue;
+                score += fish.PointValue;
                 UpdateScoreText();  // Menambah poin berdasarkan jenis ikan
             }
             capturedFish.SetActive(false); // Nonaktifkan ikan setelah disimpan

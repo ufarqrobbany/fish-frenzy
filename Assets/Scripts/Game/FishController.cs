@@ -5,7 +5,14 @@ using UnityEngine;
 public class FishController : MonoBehaviour
 {
     // Properti untuk nilai poin ikan
-    public int pointValue;  // Nilai poin ikan (besar, sedang, kecil)
+    [SerializeField] private int pointValue;  // Akan terlihat di Inspector, tapi tetap private
+
+    public int PointValue
+    {
+        get { return pointValue; }
+        set { pointValue = Mathf.Max(0, value); } // Menjamin nilai tidak negatif
+    }
+
     public float speed = 1.5f;
     public Vector2 areaLimit = new Vector2(8f, 4.5f);
     private Vector2 targetPosition;
@@ -19,6 +26,8 @@ public class FishController : MonoBehaviour
     {
         MoveFish();
     }
+
+    
 
     // Metode untuk menggerakkan ikan ke posisi target
     void MoveFish()
@@ -38,4 +47,5 @@ public class FishController : MonoBehaviour
         float randomY = Random.Range(-areaLimit.y, areaLimit.y);
         targetPosition = new Vector2(randomX, randomY);
     }
+    
 }
