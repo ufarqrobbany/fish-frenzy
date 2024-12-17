@@ -3,22 +3,28 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class BotController : MonoBehaviour
+public class BotController : PlayerController
 {
-    public float speed;
-    public int score = 0;
-    public TMP_Text scoreText;
-    private GameObject capturedFish = null; // Ikan yang ditangkap
     public Transform storageArea; // Area penyimpanan ikan
-
-    private Rigidbody2D rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        Rb = GetComponent<Rigidbody2D>();
+        Initialize();
     }
 
     void Update()
+    {
+        // Set the movement to 0 by default and handle the bot's behavior.
+        MovementX = 0;
+        MovementY = 0;
+
+        HandleInput(); // Call bot-specific movement behavior
+        Move(); // Move the bot using velocity
+        FollowCapturedFish(); // Keep fish following bot if captured
+    }
+
+    protected override void HandleInput()
     {
         if (capturedFish == null)
         {
@@ -27,24 +33,24 @@ public class BotController : MonoBehaviour
             if (nearestFish != null)
             {
                 // Gerak ke arah ikan terdekat
-                Vector2 directionToFish = ((Vector2)nearestFish.transform.position - rb.position).normalized;
-                rb.velocity = directionToFish * speed * Time.deltaTime;
-            }
-            else
-            {
+                Vector2 directionToFish = ((Vector2)nearestFish.transform.position - Rb.position).normalized;
+                MovementX = directionToFish.x;
+                MovementY = directionToFish.y;
+            } else {
                 // Tidak ada ikan yang tersedia
-                rb.velocity = Vector2.zero;
+                Rb.velocity = Vector2.zero;
             }
         }
         else
         {
             // Jika membawa ikan, arahkan ke storageArea
-            Vector2 directionToStorage = ((Vector2)storageArea.position - rb.position).normalized;
-            rb.velocity = directionToStorage * speed * Time.deltaTime;
-            capturedFish.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+            Vector2 directionToStorage = ((Vector2)storageArea.position - Rb.position).normalized;
+            MovementX = directionToStorage.x;
+            MovementY = directionToStorage.y;
         }
     }
 
+    // Cari ikan terdekat
     GameObject FindNearestFish()
     {
         GameObject[] fishObjects = GameObject.FindGameObjectsWithTag("Fish");
@@ -78,6 +84,7 @@ public class BotController : MonoBehaviour
         }
         else if (other.CompareTag("StorageArea") && capturedFish != null)
         {
+            // Add score when storing the fish
             FishController fish = capturedFish.GetComponent<FishController>();
             if (fish != null)
             {
@@ -88,10 +95,6 @@ public class BotController : MonoBehaviour
             capturedFish.SetActive(false); // Nonaktifkan ikan setelah disimpan
             capturedFish.GetComponent<Collider2D>().enabled = true; // Aktifkan kembali collider jika digunakan lagi nanti
             capturedFish = null; // Reset ikan yang dibawa        }
-        }
-        void UpdateScoreText()
-        {
-            scoreText.text = score.ToString();
         }
     }
 }
