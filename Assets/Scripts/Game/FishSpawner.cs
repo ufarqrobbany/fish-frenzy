@@ -31,7 +31,7 @@ public class FishSpawner : MonoBehaviour
             {
                 if (fish != null && !fish.activeInHierarchy)
                 {
-                    Destroy(fish); // Hapus fish clone yang tidak aktif
+                   // Destroy(fish); // Hapus fish clone yang tidak aktif
                 }
             }
             yield return new WaitForSeconds(10f); // Jalankan setiap 10 detik
