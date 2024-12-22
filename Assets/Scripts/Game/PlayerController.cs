@@ -21,7 +21,7 @@ public abstract class PlayerController : MonoBehaviour
 
     void Update()
     {
-         // Reset pergerakan setiap frame agar berhenti saat tombol dilepas
+        // Reset pergerakan setiap frame agar berhenti saat tombol dilepas
         MovementX = 0;
         MovementY = 0;
 

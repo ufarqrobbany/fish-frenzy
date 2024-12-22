@@ -27,8 +27,6 @@ public class FishController : MonoBehaviour
         MoveFish();
     }
 
-    
-
     // Metode untuk menggerakkan ikan ke posisi target
     void MoveFish()
     {

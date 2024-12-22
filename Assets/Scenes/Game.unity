@@ -2015,7 +2015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 295d9a561c23f1b4a9b79ebc049a3e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameDuration: 15
+  gameDuration: 60
   timerText: {fileID: 468394068}
   endGamePanel: {fileID: 1968278556}
   winnerText: {fileID: 346115473}
