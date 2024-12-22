@@ -23,6 +23,6 @@ public class SceneController : MonoBehaviour
 
     public void GoToGameScene2Player()
     {
-        SetPlayerDataAndGoToScene(2, 2, "Game"); // Contoh nilai
+        SetPlayerDataAndGoToScene(2, 2, "Game 1"); // Contoh nilai
     }
 }
